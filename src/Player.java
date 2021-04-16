@@ -104,8 +104,33 @@ public class Player {
 		}
 	}
 	
-	public void Change_Board(int firstCoordinate, int secondCoordinate) {
-		this.playerBoard[firstCoordinate - 1][secondCoordinate - 1] = '@';
+	public void Process_Turn(int firstCoordinate, int secondCoordinate) {
+		if (this.opponentBoard[firstCoordinate - 1][secondCoordinate - 1] == 'a') {
+			this.opponentBoard[firstCoordinate - 1][secondCoordinate - 1] = 'A';
+			this.playerBoard[firstCoordinate - 1][secondCoordinate - 1] = 'A';
+			System.out.println("Aircraft Carrier Hit!");
+		} else if (this.opponentBoard[firstCoordinate - 1][secondCoordinate - 1] == 'b') {
+			this.opponentBoard[firstCoordinate - 1][secondCoordinate - 1] = 'B';
+			this.playerBoard[firstCoordinate - 1][secondCoordinate - 1] = 'B';
+			System.out.println("Battleship Hit!");
+		} else if (this.opponentBoard[firstCoordinate - 1][secondCoordinate - 1] == 'c') {
+			this.opponentBoard[firstCoordinate - 1][secondCoordinate - 1] = 'C';
+			this.playerBoard[firstCoordinate - 1][secondCoordinate - 1] = 'C';
+			System.out.println("Cruiser Hit!");
+		} else if (this.opponentBoard[firstCoordinate - 1][secondCoordinate - 1] == 's') {
+			this.opponentBoard[firstCoordinate - 1][secondCoordinate - 1] = 'S';
+			this.playerBoard[firstCoordinate - 1][secondCoordinate - 1] = 'S';
+			System.out.println("Submarine Hit!");
+		} else if (this.opponentBoard[firstCoordinate - 1][secondCoordinate - 1] == 'd') {
+			this.opponentBoard[firstCoordinate - 1][secondCoordinate - 1] = 'D';
+			this.playerBoard[firstCoordinate - 1][secondCoordinate - 1] = 'D';
+			System.out.println("Destroyer Hit!");
+		} else {
+			this.playerBoard[firstCoordinate - 1][secondCoordinate - 1] = '@';
+			System.out.println("Miss!");
+		}
+		
+		System.out.println("\nTurn Complete.");
 	}
 	
 	public boolean Validate_First_Coordinate(String firstCoordinate) {
@@ -178,7 +203,7 @@ public class Player {
 				if (this.Validate_First_Coordinate(firstCoordinatePart) == true && this.Validate_Second_Coordinate(secondCoordinatePart) == true) {
 					int firstCoordinate = this.Convert_Input(firstCoordinatePart);
 					int secondCoordinate = Integer.parseInt(secondCoordinatePart);
-					this.Change_Board(secondCoordinate, firstCoordinate); //Had to flip the two coordinates based on how the 2d array works
+					this.Process_Turn(secondCoordinate, firstCoordinate); //Had to flip the two coordinates based on how the 2d array works
 					validInput = true;
 				} else {
 					System.out.println("Please enter valid coordinates.");
@@ -190,9 +215,180 @@ public class Player {
 		
 	}
 	
-	public void Opponent_Turn() {
-		
+	public void Place_Aircraft_Carrier(int firstCoordinate, int secondCoordinate, int direction) {
+		if (this.playerBoard[firstCoordinate - 1][secondCoordinate - 1] == '.') {
+			boolean validSpot = true;
+			
+			for (int i = 1; i < 6; i++) {
+				if (direction == 0) {
+					if (this.playerBoard[secondCoordinate - 1][firstCoordinate - 1 + i] != '.') {
+						validSpot = false;
+						break;
+					}
+				} else {
+					if (this.playerBoard[secondCoordinate -1 + i][firstCoordinate - 1] != '.') {
+						validSpot = false;
+						break;
+					}
+				}
+			}
+			
+			if (validSpot) {
+				this.playerBoard[secondCoordinate - 1][firstCoordinate - 1] = 'a';
+				for (int i = 1; i < 6; i++) {
+					if (direction == 0) {
+						this.playerBoard[secondCoordinate - 1][firstCoordinate - 1 + i] = 'a';
+					} else {
+						this.playerBoard[secondCoordinate -1 + i][firstCoordinate - 1] = 'a';
+					}
+				}
+			} else {
+				System.out.println("Please select a spot and direction with enough space to place your ship.");
+			}
+		} else {
+			System.out.println("Please select an empty spot to place your ship.");
+		}
 	}
+	
+	public void Place_Battleship(int firstCoordinate, int secondCoordinate, int direction) {
+		if (this.playerBoard[firstCoordinate - 1][secondCoordinate - 1] == '.') {
+			boolean validSpot = true;
+			
+			for (int i = 1; i < 5; i++) {
+				if (direction == 0) {
+					if (this.playerBoard[secondCoordinate - 1][firstCoordinate - 1 + i] != '.') {
+						validSpot = false;
+						break;
+					}
+				} else {
+					if (this.playerBoard[secondCoordinate - 1 + i][firstCoordinate - 1] != '.') {
+						validSpot = false;
+						break;
+					}
+				}
+			}
+			
+			if (validSpot) {
+				this.playerBoard[secondCoordinate - 1][firstCoordinate - 1] = 'b';
+				for (int i = 1; i < 5; i++) {
+					if (direction == 0) {
+						this.playerBoard[secondCoordinate - 1][firstCoordinate - 1 + i] = 'b';
+					} else {
+						this.playerBoard[secondCoordinate - 1 + i][firstCoordinate - 1] = 'b';
+					}
+				}
+			} else {
+				System.out.println("Please select a spot and direction with enough space to place your ship.");
+			}
+		} else {
+			System.out.println("Please select an empty spot to place your ship.");
+		}
+	}
+	
+	public void Place_Cruiser(int firstCoordinate, int secondCoordinate, int direction) {
+		if (this.playerBoard[firstCoordinate - 1][secondCoordinate - 1] == '.') {
+			boolean validSpot = true;
+			
+			for (int i = 1; i < 4; i++) {
+				if (direction == 0) {
+					if (this.playerBoard[secondCoordinate - 1][firstCoordinate - 1 + i] != '.') {
+						validSpot = false;
+						break;
+					}
+				} else {
+					if (this.playerBoard[secondCoordinate - 1 + i][firstCoordinate - 1] != '.') {
+						validSpot = false;
+						break;
+					}
+				}
+			}
+			
+			if (validSpot) {
+				this.playerBoard[secondCoordinate - 1][firstCoordinate - 1] = 'c';
+				for (int i = 1; i < 4; i++) {
+					if (direction == 0) {
+						this.playerBoard[secondCoordinate - 1][firstCoordinate - 1 + i] = 'c';
+					} else {
+						this.playerBoard[secondCoordinate - 1 + i][firstCoordinate - 1] = 'c';
+					}
+				}
+			} else {
+				System.out.println("Please select a spot and direction with enough space to place your ship.");
+			}
+		} else {
+			System.out.println("Please select an empty spot to place your ship.");
+		}
+	}
+	
+	public void Place_Submarine(int firstCoordinate, int secondCoordinate, int direction) {
+		if (this.playerBoard[firstCoordinate - 1][secondCoordinate - 1] == '.') {
+			boolean validSpot = true;
+			
+			for (int i = 1; i < 3; i++) {
+				if (direction == 0) {
+					if (this.playerBoard[secondCoordinate - 1][firstCoordinate - 1 + i] != '.') {
+						validSpot = false;
+						break;
+					}
+				} else {
+					if (this.playerBoard[secondCoordinate -1 + i][firstCoordinate - 1] != '.') {
+						validSpot = false;
+						break;
+					}
+				}
+			}
+			
+			if (validSpot) {
+				this.playerBoard[secondCoordinate - 1][firstCoordinate - 1] = 's';
+				for (int i = 1; i < 3; i++) {
+					if (direction == 0) {
+						this.playerBoard[secondCoordinate - 1][firstCoordinate - 1 + i] = 's';
+					} else {
+						this.playerBoard[secondCoordinate - 1 + i][firstCoordinate - 1] = 's';
+					}
+				}
+			} else {
+				System.out.println("Please select a spot and direction with enough space to place your ship.");
+			}
+		} else {
+			System.out.println("Please select an empty spot to place your ship.");
+		}
+	}
+	
+    public void Place_Destroyer(int firstCoordinate, int secondCoordinate, int direction) {
+    	if (this.playerBoard[firstCoordinate - 1][secondCoordinate - 1] == '.') {
+			boolean validSpot = true;
+			
+			for (int i = 1; i < 2; i++) {
+				if (direction == 0) {
+					if (this.playerBoard[secondCoordinate - 1][firstCoordinate - 1 + i] != '.') {
+						validSpot = false;
+						break;
+					}
+				} else {
+					if (this.playerBoard[secondCoordinate -1 + i][firstCoordinate - 1] != '.') {
+						validSpot = false;
+						break;
+					}
+				}
+			}
+			
+			if (validSpot) {
+				this.playerBoard[secondCoordinate - 1][firstCoordinate - 1] = 'd';
+				for (int i = 1; i < 2; i++) {
+					if (direction == 0) {
+						this.playerBoard[secondCoordinate - 1][firstCoordinate - 1 + i] = 'd';
+					} else {
+						this.playerBoard[secondCoordinate -1 + i][firstCoordinate - 1] = 'd';
+					}
+				}
+			} else {
+				System.out.println("Please select a spot and direction with enough space to place your ship.");
+			}
+		} else {
+			System.out.println("Please select an empty spot to place your ship.");
+		}
+    }
 	
 	public void Run_Until_Close() {
 		boolean isRunning = true;
