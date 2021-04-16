@@ -1,5 +1,3 @@
-import java.text.MessageFormat;
-
 /**********************************************************************
 *                  Assignment 9 -- Battleship                         *
 *                                                                     *
@@ -25,6 +23,8 @@ import java.text.MessageFormat;
 * This program is copyright (c)2021 Dean Zeller and Jacob Hardman.    *
 *                                                                     *
 **********************************************************************/
+
+import java.text.MessageFormat;
 
 public class Player {
 	
