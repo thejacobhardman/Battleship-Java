@@ -1,3 +1,5 @@
+import java.text.MessageFormat;
+
 /**********************************************************************
 *                  Assignment 9 -- Battleship                         *
 *                                                                     *
@@ -25,5 +27,80 @@
 **********************************************************************/
 
 public class Player {
+	
+	private String name;
+	private int width;
+	private int height;
+	private char[][] playerBoard;
+	private char[][] opponentBoard;
+	
+	public Player() {
+		this.name = "Player 1";
+		this.width = 10;
+		this.height = 10;
+		this.playerBoard = new char[width][height];
+		this.opponentBoard = new char[width][height];
+		for (int i = 0; i < 10; i++) {
+			for (int j = 0; j < 10; j++) {
+				this.playerBoard[i][j] = '.';
+				this.opponentBoard[i][j] = '.';
+			}
+		}
+	}
+	
+	public void Display_Player_Board() {
+		
+//		Initial board:   
+//			| A  B  C  D  E  F  G  H  I  J |
+//		 ---+------------------------------+ 
+//		  1 | .  .  .  .  .  .  .  .  .  . | 
+//		  2 | .  .  .  .  .  .  .  .  .  . |         a/A – Aircraft Carrier (5) 
+//		  3 | .  .  .  .  .  .  .  .  .  . |         b/B – Battleship (4) 
+//		  4 | .  .  .  .  .  .  .  .  .  . |         c/C – Cruiser (3) 
+//		  5 | .  .  .  .  .  .  .  .  .  . |         s/S – Submarine (3) 
+//		  6 | .  .  .  .  .  .  .  .  .  . |         d/D – Destroyer (2) 
+//		  7 | .  .  .  .  .  .  .  .  .  . | 
+//		  8 | .  .  .  .  .  .  .  .  .  . |          .  - Unexplored 
+//		  9 | .  .  .  .  .  .  .  .  .  . |          @  - Missed shot
+//		 10 | .  .  .  .  .  .  .  .  .  . |
+//		 ---+------------------------------+
+		
+		System.out.println("   | A  B  C  D  E  F  G  H  I  J |");
+		System.out.println("---+------------------------------+");
+		for (int i = 0; i < 10; i++) {
+			if (i != 9) { System.out.print(MessageFormat.format(" {0} |", i + 1)); } 
+			else { System.out.print(MessageFormat.format("{0} |", i + 1)); }
+			for (int j = 0; j < 10; j++) {
+				System.out.print(MessageFormat.format(" {0} ", this.playerBoard[i][j]));
+			}
+			System.out.print("|\n");
+		}
+		System.out.println("---+------------------------------+");
+	}
+	
+	public void Display_Opponent_Board() {
+		System.out.println("   | A  B  C  D  E  F  G  H  I  J |");
+		System.out.println("---+------------------------------+");
+		for (int i = 0; i < 10; i++) {
+			if (i != 9) { System.out.print(MessageFormat.format(" {0} |", i + 1)); } 
+			else { System.out.print(MessageFormat.format("{0} |", i + 1)); }
+			for (int j = 0; j < 10; j++) {
+				System.out.print(MessageFormat.format(" {0} ", this.opponentBoard[i][j]));
+			}
+			System.out.print("|\n");
+		}
+		System.out.println("---+------------------------------+");
+	}
+	
+	public void Reset_Board() {
+		for (int i = 0; i < 10; i++) {
+			for (int j = 0; j < 10; j++) {
+				this.playerBoard[i][j] = '.';
+				this.opponentBoard[i][j] = '.';
+			}
+		}
+	}
+	
+	
 
 }
