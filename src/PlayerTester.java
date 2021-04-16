@@ -18,8 +18,9 @@
 public class PlayerTester {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		Player PlayerOne = new Player();
+		
+		PlayerOne.Run_Until_Close();
 	}
 
 }
