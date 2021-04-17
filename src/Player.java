@@ -18,6 +18,8 @@
 *   playerBoard -- The 2d array that store's the gameboard's values.  *
 *   opponentBoard -- The 2d array that store's the opponent's         *
 *   gameboard's value.                                                *
+*   scanner -- The Scanner Java util that is used to capture user     *
+*   input.                                                            *
 *                                                                     *
 * COPYRIGHT:                                                          *
 * This program is copyright (c)2021 Dean Zeller and Jacob Hardman.    *
@@ -37,6 +39,12 @@ public class Player {
 	private char[][] opponentBoard;
 	private Scanner input;
 	
+	/***********************************************************************
+	 * Method:   Constructor (all parameters)                               *
+	 * Purpose:  Create a Player object with default parameters.            *
+	 * Parameters: None.                                                    *
+	 * Return value: None                                                   *
+	 ***********************************************************************/
 	public Player() {
 		this.name = "Player 1";
 		this.width = 10;
@@ -52,6 +60,12 @@ public class Player {
 		this.input = new Scanner(System.in);
 	}
 	
+	/************************************************************************
+	 * Method: Display_Player_Board                                         *
+	 * Purpose:  Displays the player's board.                               *
+	 * Parameters: None                                                     *
+	 * Return value: None                                                   *
+	 ***********************************************************************/
 	public void Display_Player_Board() {
 		
 //		Initial board:   
@@ -82,6 +96,12 @@ public class Player {
 		System.out.println("---+------------------------------+");
 	}
 	
+	/************************************************************************
+	 * Method: Display_Opponent_Board                                       *
+	 * Purpose:  Displays the opponent's board.                             *
+	 * Parameters: None                                                     *
+	 * Return value: None                                                   *
+	 ***********************************************************************/
 	public void Display_Opponent_Board() {
 		System.out.println("   | A  B  C  D  E  F  G  H  I  J |");
 		System.out.println("---+------------------------------+");
@@ -96,6 +116,12 @@ public class Player {
 		System.out.println("---+------------------------------+");
 	}
 	
+	/************************************************************************
+	 * Method: Reset_Board                                                  *
+	 * Purpose:  Resets both player's boards.                               *
+	 * Parameters: None                                                     *
+	 * Return value: None                                                   *
+	 ***********************************************************************/
 	public void Reset_Board() {
 		for (int i = 0; i < 10; i++) {
 			for (int j = 0; j < 10; j++) {
@@ -105,6 +131,17 @@ public class Player {
 		}
 	}
 	
+	/************************************************************************
+	 * Method: Process_Turn                                                 *
+	 * Purpose: Takes in the user's guess and checks to see if a hit        *
+	 * 		    has been made.                                              *
+	 * Parameters:                                                          *
+	 *   firstCoordinate -- The first coordinate used to specify which      *
+	 *   	space on the board to check.                                    *
+	 *   secondCoordinate -- The second coordinate used to specify which    *
+	 *   	space on the board to check.                                    *
+	 * Return value: None                                                   *
+	 ***********************************************************************/
 	public void Process_Turn(int firstCoordinate, int secondCoordinate) {
 		if (this.opponentBoard[firstCoordinate - 1][secondCoordinate - 1] == 'a') {
 			this.opponentBoard[firstCoordinate - 1][secondCoordinate - 1] = 'A';
@@ -149,6 +186,14 @@ public class Player {
 		System.out.println("\nTurn Complete.");
 	}
 	
+	/************************************************************************
+	 * Method: Check_If_AC_Destroyed                                        *
+	 * Purpose: Checks to see if the Aircraft Carrier has been destroyed.   *
+	 * Parameters: None.                                                    *
+	 * Return value:                                                        *
+	 * 		isDestroyed -- Boolean value denoting whether the ship has      *
+	 * 					   been destroyed.                                  *
+	 ***********************************************************************/
 	public boolean Check_If_AC_Destroyed() {
 		boolean isDestroyed = true;
 		for (int i = 0; i < 10; i++) {
@@ -162,6 +207,14 @@ public class Player {
 		return isDestroyed;
 	}
 	
+	/************************************************************************
+	 * Method: Check_If_Battleship_Destroyed                                *
+	 * Purpose: Checks to see if the Battleship has been destroyed.         *
+	 * Parameters: None.                                                    *
+	 * Return value:                                                        *
+	 * 		isDestroyed -- Boolean value denoting whether the ship has      *
+	 * 					   been destroyed.                                  *
+	 ***********************************************************************/
 	public boolean Check_If_Battleship_Destroyed() {
 		boolean isDestroyed = true;
 		for (int i = 0; i < 10; i++) {
@@ -175,6 +228,14 @@ public class Player {
 		return isDestroyed;
 	}
 	
+	/************************************************************************
+	 * Method: Check_If_Cruiser_Destroyed                                   *
+	 * Purpose: Checks to see if the Cruiser has been destroyed.            *
+	 * Parameters: None.                                                    *
+	 * Return value:                                                        *
+	 * 		isDestroyed -- Boolean value denoting whether the ship has      *
+	 * 					   been destroyed.                                  *
+	 ***********************************************************************/
 	public boolean Check_If_Cruiser_Destroyed() {
 		boolean isDestroyed = true;
 		for (int i = 0; i < 10; i++) {
@@ -188,6 +249,14 @@ public class Player {
 		return isDestroyed;
 	}
 	
+	/************************************************************************
+	 * Method: Check_If_Sub_Destroyed                                       *
+	 * Purpose: Checks to see if the Submarine has been destroyed.          *
+	 * Parameters: None.                                                    *
+	 * Return value:                                                        *
+	 * 		isDestroyed -- Boolean value denoting whether the ship has      *
+	 * 					   been destroyed.                                  *
+	 ***********************************************************************/
 	public boolean Check_If_Sub_Destroyed() {
 		boolean isDestroyed = true;
 		for (int i = 0; i < 10; i++) {
@@ -201,6 +270,14 @@ public class Player {
 		return isDestroyed;
 	}
 	
+	/************************************************************************
+	 * Method: Check_If_Destroyer_Destroyed                                 *
+	 * Purpose: Checks to see if the Destroyer has been destroyed.          *
+	 * Parameters: None.                                                    *
+	 * Return value:                                                        *
+	 * 		isDestroyed -- Boolean value denoting whether the ship has      *
+	 * 					   been destroyed.                                  *
+	 ***********************************************************************/
 	public boolean Check_If_Destroyer_Destroyed() {
 		boolean isDestroyed = true;
 		for (int i = 0; i < 10; i++) {
@@ -214,6 +291,18 @@ public class Player {
 		return isDestroyed;
 	}
 	
+	/************************************************************************
+	 * Method: Validate_First_Coordinate                                    *
+	 * Purpose: Validates whether the user has entered a valid              *
+	 * 			first coordinate.                                           *
+	 * Parameters:                                                          *
+	 * 		firstCoordinate -- The first coordinate used to specify a space *
+	 * 		                   on the gameboard. Corresponds to the Letter  *
+	 * 						   axis.                                        *
+	 * Return value:                                                        *
+	 * 		isDestroyed -- Boolean value denoting whether the user has      *
+	 * 					   entered a valid coordinate.                      *
+	 ***********************************************************************/
 	public boolean Validate_First_Coordinate(String firstCoordinate) {
 		boolean validInput = false;
 		
@@ -233,6 +322,18 @@ public class Player {
 		return validInput;
 	}
 	
+	/************************************************************************
+	 * Method: Validate_Second_Coordinate                                   *
+	 * Purpose: Validates whether the user has entered a valid              *
+	 * 			second coordinate.                                          *
+	 * Parameters:                                                          *
+	 * 	   firstCoordinate -- The second coordinate used to specify a space *
+	 * 		                  on the gameboard. Corresponds to the Letter   *
+	 * 						  axis.                                         *
+	 * Return value:                                                        *
+	 * 		isDestroyed -- Boolean value denoting whether the user has      *
+	 * 					   entered a valid coordinate.                      *
+	 ***********************************************************************/
 	public boolean Validate_Second_Coordinate(String secondCoordinate) {
 		boolean validInput = true;
 		int convertedInput = 0;
@@ -250,6 +351,14 @@ public class Player {
 		return validInput;
 	}
 	
+	/************************************************************************
+	 * Method: Convert_Input                                                *
+	 * Purpose: Converts the user's first coordinate input from a letter    *
+	 * 			into an integer value.                                      *
+	 * Parameters:                                                          *
+	 * 	   input -- The user's first input coordinate as a String.          *
+	 * Return value: The converted input as an integer.                     *
+	 ***********************************************************************/
 	public int Convert_Input(String input) {
 		if (input.toUpperCase().equals("A")) { return 1; }
 		else if (input.toUpperCase().equals("B")) { return 2; }
@@ -264,6 +373,12 @@ public class Player {
 		else { return 0; }
 	}
 	
+	/************************************************************************
+	 * Method: Player_Turn                                                  *
+	 * Purpose: Accepts input from the user to process a turn.              *
+	 * Parameters: None.                                                    *          
+	 * Return value: None.                                                  *
+	 ***********************************************************************/
 	public void Player_Turn() {
 		System.out.println("\n" + this.name + "'s Turn.");
 		this.Display_Player_Board();
@@ -296,6 +411,20 @@ public class Player {
 		
 	}
 	
+	/************************************************************************
+	 * Method: Place_Aircraft_Carrier                                       *
+	 * Purpose: Takes in coordinates, validates them, and then places       *
+	 * 			the ship on the board.                                      *
+	 * Parameters:                                                          *
+	 *   firstCoordinate -- The first coordinate used to specify which      *
+	 *   	space on the board to place the ship.                           *
+	 *   secondCoordinate -- The second coordinate used to specify which    *
+	 *   	space on the board to place the ship.                           *
+	 *   direction -- Integer which denotes whether the ship should be      *
+	 *   			  placed vertically or horizontally.                    *
+	 * Return value: Boolean denoting whether or not the ship has been      *
+	 * 				 been placed in a valid space on the board.             *
+	 ***********************************************************************/
 	public boolean Place_Aircraft_Carrier(int firstCoordinate, int secondCoordinate, int direction) {
 		boolean validSpot = true;
 		if (this.opponentBoard[secondCoordinate - 1][firstCoordinate - 1] == '.') {
@@ -356,6 +485,20 @@ public class Player {
 		return validSpot;
 	}
 	
+	/************************************************************************
+	 * Method: Place_Battleship                                             *
+	 * Purpose: Takes in coordinates, validates them, and then places       *
+	 * 			the ship on the board.                                      *
+	 * Parameters:                                                          *
+	 *   firstCoordinate -- The first coordinate used to specify which      *
+	 *   	space on the board to place the ship.                           *
+	 *   secondCoordinate -- The second coordinate used to specify which    *
+	 *   	space on the board to place the ship.                           *
+	 *   direction -- Integer which denotes whether the ship should be      *
+	 *   			  placed vertically or horizontally.                    *
+	 * Return value: Boolean denoting whether or not the ship has been      *
+	 * 				 been placed in a valid space on the board.             *
+	 ***********************************************************************/
 	public boolean Place_Battleship(int firstCoordinate, int secondCoordinate, int direction) {
 		boolean validSpot = true;
 		if (this.opponentBoard[secondCoordinate - 1][firstCoordinate - 1] == '.') {
@@ -416,6 +559,20 @@ public class Player {
 		return validSpot;
 	}
 	
+	/************************************************************************
+	 * Method: Place_Cruiser                                                *
+	 * Purpose: Takes in coordinates, validates them, and then places       *
+	 * 			the ship on the board.                                      *
+	 * Parameters:                                                          *
+	 *   firstCoordinate -- The first coordinate used to specify which      *
+	 *   	space on the board to place the ship.                           *
+	 *   secondCoordinate -- The second coordinate used to specify which    *
+	 *   	space on the board to place the ship.                           *
+	 *   direction -- Integer which denotes whether the ship should be      *
+	 *   			  placed vertically or horizontally.                    *
+	 * Return value: Boolean denoting whether or not the ship has been      *
+	 * 				 been placed in a valid space on the board.             *
+	 ***********************************************************************/
 	public boolean Place_Cruiser(int firstCoordinate, int secondCoordinate, int direction) {
 		boolean validSpot = true;
 		if (this.opponentBoard[secondCoordinate - 1][firstCoordinate - 1] == '.') {
@@ -476,6 +633,20 @@ public class Player {
 		return validSpot;
 	}
 	
+	/************************************************************************
+	 * Method: Place_Submarine                                              *
+	 * Purpose: Takes in coordinates, validates them, and then places       *
+	 * 			the ship on the board.                                      *
+	 * Parameters:                                                          *
+	 *   firstCoordinate -- The first coordinate used to specify which      *
+	 *   	space on the board to place the ship.                           *
+	 *   secondCoordinate -- The second coordinate used to specify which    *
+	 *   	space on the board to place the ship.                           *
+	 *   direction -- Integer which denotes whether the ship should be      *
+	 *   			  placed vertically or horizontally.                    *
+	 * Return value: Boolean denoting whether or not the ship has been      *
+	 * 				 been placed in a valid space on the board.             *
+	 ***********************************************************************/
 	public boolean Place_Submarine(int firstCoordinate, int secondCoordinate, int direction) {
 		boolean validSpot = true;
 		if (this.opponentBoard[secondCoordinate - 1][firstCoordinate - 1] == '.') {
@@ -536,6 +707,20 @@ public class Player {
 		return validSpot;
 	}
 	
+	/************************************************************************
+	 * Method: Place_Destroyer                                              *
+	 * Purpose: Takes in coordinates, validates them, and then places       *
+	 * 			the ship on the board.                                      *
+	 * Parameters:                                                          *
+	 *   firstCoordinate -- The first coordinate used to specify which      *
+	 *   	space on the board to place the ship.                           *
+	 *   secondCoordinate -- The second coordinate used to specify which    *
+	 *   	space on the board to place the ship.                           *
+	 *   direction -- Integer which denotes whether the ship should be      *
+	 *   			  placed vertically or horizontally.                    *
+	 * Return value: Boolean denoting whether or not the ship has been      *
+	 * 				 been placed in a valid space on the board.             *
+	 ***********************************************************************/
     public boolean Place_Destroyer(int firstCoordinate, int secondCoordinate, int direction) {
     	boolean validSpot = true;
     	if (this.opponentBoard[secondCoordinate - 1][firstCoordinate - 1] == '.') {
@@ -596,6 +781,13 @@ public class Player {
     	return validSpot;
     }
 	
+    /************************************************************************
+	 * Method: Place_Ships                                                  *
+	 * Purpose: Takes in user input, to be used as coordinates in order     *
+	 *          to place ships on the board.                                *
+	 * Parameters: None.                                                    *
+	 * Return value: None.                                                  *
+	 ***********************************************************************/
     public void Place_Ships() {
     	boolean validInput = false;
     	int firstCoordinate = 0, secondCoordinate = 0, direction = 0;
@@ -674,6 +866,13 @@ public class Player {
     	}
     }
     
+    /************************************************************************
+	 * Method: Random_Place_Ships                                           *
+	 * Purpose: Generates random coordinates to be used to place ships on   *
+	 * 			random spots on the board.                                  *
+	 * Parameters: None.                                                    *
+	 * Return value: None.                                                  *
+	 ***********************************************************************/
     public void Random_Place_Ships() {
     	for (int i = 0; i < 5; i++) {
     		boolean validSpot = false;
@@ -708,6 +907,14 @@ public class Player {
     	System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
     }
     
+    /************************************************************************
+	 * Method: Check_For_Game_Over                                          *
+	 * Purpose: Checks the board to see whether there are any ships still   *
+	 * 			alive.                                                      *
+	 * Parameters: None.                                                    *
+	 * Return value: Boolean value denoting whether or not the game has     * 
+	 * 				 ended.                                                 *
+	 ***********************************************************************/
     public boolean Check_For_Game_Over() {
     	boolean isGameOver = true;
     	for (int i = 0; i < 10; i++) {
@@ -724,6 +931,13 @@ public class Player {
     	return isGameOver;
     }
     
+    /************************************************************************
+	 * Method: Run_Until_Close                                              *
+	 * Purpose: Keeps the game running until the win conditions have been   *
+	 * 			met.                                                        *
+	 * Parameters: None.                                                    *
+	 * Return value: None.                                                  *
+	 ***********************************************************************/
 	public void Run_Until_Close() {
 		boolean isRunning = true;
 		int numOfGuesses = 0;
