@@ -106,32 +106,112 @@ public class Player {
 	}
 	
 	public void Process_Turn(int firstCoordinate, int secondCoordinate) {
-		if (this.opponentBoard[firstCoordinate - 1][secondCoordinate - 1] == 'a') {
+		if (this.playerBoard[firstCoordinate - 1][secondCoordinate - 1] == 'a') {
 			this.opponentBoard[firstCoordinate - 1][secondCoordinate - 1] = 'A';
 			this.playerBoard[firstCoordinate - 1][secondCoordinate - 1] = 'A';
 			System.out.println("Aircraft Carrier Hit!");
-		} else if (this.opponentBoard[firstCoordinate - 1][secondCoordinate - 1] == 'b') {
+			if (this.Check_If_AC_Destroyed() == true) {
+				System.out.println("You sunk my Aircraft Carrier!");
+			}
+		} else if (this.playerBoard[firstCoordinate - 1][secondCoordinate - 1] == 'b') {
 			this.opponentBoard[firstCoordinate - 1][secondCoordinate - 1] = 'B';
 			this.playerBoard[firstCoordinate - 1][secondCoordinate - 1] = 'B';
 			System.out.println("Battleship Hit!");
-		} else if (this.opponentBoard[firstCoordinate - 1][secondCoordinate - 1] == 'c') {
+			if (this.Check_If_Battleship_Destroyed() == true) {
+				System.out.println("You sunk my Battleship!");
+			}
+		} else if (this.playerBoard[firstCoordinate - 1][secondCoordinate - 1] == 'c') {
 			this.opponentBoard[firstCoordinate - 1][secondCoordinate - 1] = 'C';
 			this.playerBoard[firstCoordinate - 1][secondCoordinate - 1] = 'C';
 			System.out.println("Cruiser Hit!");
-		} else if (this.opponentBoard[firstCoordinate - 1][secondCoordinate - 1] == 's') {
+			if (this.Check_If_Cruiser_Destroyed() == true) {
+				System.out.println("You sunk my Cruiser!");
+			}
+		} else if (this.playerBoard[firstCoordinate - 1][secondCoordinate - 1] == 's') {
 			this.opponentBoard[firstCoordinate - 1][secondCoordinate - 1] = 'S';
 			this.playerBoard[firstCoordinate - 1][secondCoordinate - 1] = 'S';
 			System.out.println("Submarine Hit!");
-		} else if (this.opponentBoard[firstCoordinate - 1][secondCoordinate - 1] == 'd') {
+			if (this.Check_If_Sub_Destroyed() == true) {
+				System.out.println("You sunk my Submarine!");
+			}
+		} else if (this.playerBoard[firstCoordinate - 1][secondCoordinate - 1] == 'd') {
 			this.opponentBoard[firstCoordinate - 1][secondCoordinate - 1] = 'D';
 			this.playerBoard[firstCoordinate - 1][secondCoordinate - 1] = 'D';
 			System.out.println("Destroyer Hit!");
+			if (this.Check_If_Destroyer_Destroyed() == true) {
+				System.out.println("You sunk my Destroyer!");
+			}
 		} else {
 			this.playerBoard[firstCoordinate - 1][secondCoordinate - 1] = '@';
 			System.out.println("Miss!");
 		}
 		
 		System.out.println("\nTurn Complete.");
+	}
+	
+	public boolean Check_If_AC_Destroyed() {
+		boolean isDestroyed = true;
+		for (int i = 0; i < 10; i++) {
+			for (int j = 0; j < 10; j++) {
+				if (this.playerBoard[i][j] == 'a') {
+					isDestroyed = false;
+					break;
+				}
+			}
+		}
+		return isDestroyed;
+	}
+	
+	public boolean Check_If_Battleship_Destroyed() {
+		boolean isDestroyed = true;
+		for (int i = 0; i < 10; i++) {
+			for (int j = 0; j < 10; j++) {
+				if (this.playerBoard[i][j] == 'b') {
+					isDestroyed = false;
+					break;
+				}
+			}
+		}
+		return isDestroyed;
+	}
+	
+	public boolean Check_If_Cruiser_Destroyed() {
+		boolean isDestroyed = true;
+		for (int i = 0; i < 10; i++) {
+			for (int j = 0; j < 10; j++) {
+				if (this.playerBoard[i][j] == 'c') {
+					isDestroyed = false;
+					break;
+				}
+			}
+		}
+		return isDestroyed;
+	}
+	
+	public boolean Check_If_Sub_Destroyed() {
+		boolean isDestroyed = true;
+		for (int i = 0; i < 10; i++) {
+			for (int j = 0; j < 10; j++) {
+				if (this.playerBoard[i][j] == 's') {
+					isDestroyed = false;
+					break;
+				}
+			}
+		}
+		return isDestroyed;
+	}
+	
+	public boolean Check_If_Destroyer_Destroyed() {
+		boolean isDestroyed = true;
+		for (int i = 0; i < 10; i++) {
+			for (int j = 0; j < 10; j++) {
+				if (this.playerBoard[i][j] == 'd') {
+					isDestroyed = false;
+					break;
+				}
+			}
+		}
+		return isDestroyed;
 	}
 	
 	public boolean Validate_First_Coordinate(String firstCoordinate) {
@@ -628,12 +708,35 @@ public class Player {
     	System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
     }
     
+    public boolean Check_For_Game_Over() {
+    	boolean isGameOver = true;
+    	for (int i = 0; i < 10; i++) {
+			for (int j = 0; j < 10; j++) {
+				if (this.playerBoard[i][j] == 'a' ||
+						this.playerBoard[i][j] == 'b' ||
+						this.playerBoard[i][j] == 'c' ||
+						this.playerBoard[i][j] == 's' ||
+						this.playerBoard[i][j] == 'd') {
+					isGameOver = false;
+				}
+			}
+		}
+    	return isGameOver;
+    }
+    
 	public void Run_Until_Close() {
 		boolean isRunning = true;
+		int numOfGuesses = 0;
 		this.Random_Place_Ships();
 		while (isRunning) {
 			this.Player_Turn();
+			if (this.Check_For_Game_Over() == true) {
+				isRunning = false;
+			}
+			numOfGuesses++;
 		}
+		System.out.println("\nGAME OVER!!!");
+		System.out.println("It took you " + numOfGuesses + " guesses to win.");
 	}
 
 }
