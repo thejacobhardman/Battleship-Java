@@ -106,35 +106,35 @@ public class Player {
 	}
 	
 	public void Process_Turn(int firstCoordinate, int secondCoordinate) {
-		if (this.playerBoard[firstCoordinate - 1][secondCoordinate - 1] == 'a') {
+		if (this.opponentBoard[firstCoordinate - 1][secondCoordinate - 1] == 'a') {
 			this.opponentBoard[firstCoordinate - 1][secondCoordinate - 1] = 'A';
 			this.playerBoard[firstCoordinate - 1][secondCoordinate - 1] = 'A';
 			System.out.println("Aircraft Carrier Hit!");
 			if (this.Check_If_AC_Destroyed() == true) {
 				System.out.println("You sunk my Aircraft Carrier!");
 			}
-		} else if (this.playerBoard[firstCoordinate - 1][secondCoordinate - 1] == 'b') {
+		} else if (this.opponentBoard[firstCoordinate - 1][secondCoordinate - 1] == 'b') {
 			this.opponentBoard[firstCoordinate - 1][secondCoordinate - 1] = 'B';
 			this.playerBoard[firstCoordinate - 1][secondCoordinate - 1] = 'B';
 			System.out.println("Battleship Hit!");
 			if (this.Check_If_Battleship_Destroyed() == true) {
 				System.out.println("You sunk my Battleship!");
 			}
-		} else if (this.playerBoard[firstCoordinate - 1][secondCoordinate - 1] == 'c') {
+		} else if (this.opponentBoard[firstCoordinate - 1][secondCoordinate - 1] == 'c') {
 			this.opponentBoard[firstCoordinate - 1][secondCoordinate - 1] = 'C';
 			this.playerBoard[firstCoordinate - 1][secondCoordinate - 1] = 'C';
 			System.out.println("Cruiser Hit!");
 			if (this.Check_If_Cruiser_Destroyed() == true) {
 				System.out.println("You sunk my Cruiser!");
 			}
-		} else if (this.playerBoard[firstCoordinate - 1][secondCoordinate - 1] == 's') {
+		} else if (this.opponentBoard[firstCoordinate - 1][secondCoordinate - 1] == 's') {
 			this.opponentBoard[firstCoordinate - 1][secondCoordinate - 1] = 'S';
 			this.playerBoard[firstCoordinate - 1][secondCoordinate - 1] = 'S';
 			System.out.println("Submarine Hit!");
 			if (this.Check_If_Sub_Destroyed() == true) {
 				System.out.println("You sunk my Submarine!");
 			}
-		} else if (this.playerBoard[firstCoordinate - 1][secondCoordinate - 1] == 'd') {
+		} else if (this.opponentBoard[firstCoordinate - 1][secondCoordinate - 1] == 'd') {
 			this.opponentBoard[firstCoordinate - 1][secondCoordinate - 1] = 'D';
 			this.playerBoard[firstCoordinate - 1][secondCoordinate - 1] = 'D';
 			System.out.println("Destroyer Hit!");
@@ -153,7 +153,7 @@ public class Player {
 		boolean isDestroyed = true;
 		for (int i = 0; i < 10; i++) {
 			for (int j = 0; j < 10; j++) {
-				if (this.playerBoard[i][j] == 'a') {
+				if (this.opponentBoard[i][j] == 'a') {
 					isDestroyed = false;
 					break;
 				}
@@ -166,7 +166,7 @@ public class Player {
 		boolean isDestroyed = true;
 		for (int i = 0; i < 10; i++) {
 			for (int j = 0; j < 10; j++) {
-				if (this.playerBoard[i][j] == 'b') {
+				if (this.opponentBoard[i][j] == 'b') {
 					isDestroyed = false;
 					break;
 				}
@@ -179,7 +179,7 @@ public class Player {
 		boolean isDestroyed = true;
 		for (int i = 0; i < 10; i++) {
 			for (int j = 0; j < 10; j++) {
-				if (this.playerBoard[i][j] == 'c') {
+				if (this.opponentBoard[i][j] == 'c') {
 					isDestroyed = false;
 					break;
 				}
@@ -192,7 +192,7 @@ public class Player {
 		boolean isDestroyed = true;
 		for (int i = 0; i < 10; i++) {
 			for (int j = 0; j < 10; j++) {
-				if (this.playerBoard[i][j] == 's') {
+				if (this.opponentBoard[i][j] == 's') {
 					isDestroyed = false;
 					break;
 				}
@@ -205,7 +205,7 @@ public class Player {
 		boolean isDestroyed = true;
 		for (int i = 0; i < 10; i++) {
 			for (int j = 0; j < 10; j++) {
-				if (this.playerBoard[i][j] == 'd') {
+				if (this.opponentBoard[i][j] == 'd') {
 					isDestroyed = false;
 					break;
 				}
@@ -298,28 +298,28 @@ public class Player {
 	
 	public boolean Place_Aircraft_Carrier(int firstCoordinate, int secondCoordinate, int direction) {
 		boolean validSpot = true;
-		if (this.playerBoard[secondCoordinate - 1][firstCoordinate - 1] == '.') {
-			for (int i = 1; i < 6; i++) {
+		if (this.opponentBoard[secondCoordinate - 1][firstCoordinate - 1] == '.') {
+			for (int i = 1; i < 5; i++) {
 				if (direction == 0) {
 					if (firstCoordinate > 5) {
-						if (this.playerBoard[secondCoordinate - 1][firstCoordinate - 1 - i] != '.') {
+						if (this.opponentBoard[secondCoordinate - 1][firstCoordinate - 1 - i] != '.') {
 							validSpot = false;
 							break;
 						}
 					} else {
-						if (this.playerBoard[secondCoordinate - 1][firstCoordinate - 1 + i] != '.') {
+						if (this.opponentBoard[secondCoordinate - 1][firstCoordinate - 1 + i] != '.') {
 							validSpot = false;
 							break;
 						}
 					}
 				} else {
 					if (secondCoordinate > 5) {
-						if (this.playerBoard[secondCoordinate -1 - i][firstCoordinate - 1] != '.') {
+						if (this.opponentBoard[secondCoordinate -1 - i][firstCoordinate - 1] != '.') {
 							validSpot = false;
 							break;
 						}
 					} else {
-						if (this.playerBoard[secondCoordinate -1 + i][firstCoordinate - 1] != '.') {
+						if (this.opponentBoard[secondCoordinate -1 + i][firstCoordinate - 1] != '.') {
 							validSpot = false;
 							break;
 						}
@@ -328,19 +328,19 @@ public class Player {
 			}
 			
 			if (validSpot) {
-				this.playerBoard[secondCoordinate - 1][firstCoordinate - 1] = 'a';
-				for (int i = 1; i < 6; i++) {
+				this.opponentBoard[secondCoordinate - 1][firstCoordinate - 1] = 'a';
+				for (int i = 1; i < 5; i++) {
 					if (direction == 0) {
 						if (firstCoordinate > 5) {
-							this.playerBoard[secondCoordinate - 1][firstCoordinate - 1 - i] = 'a';
+							this.opponentBoard[secondCoordinate - 1][firstCoordinate - 1 - i] = 'a';
 						} else {
-							this.playerBoard[secondCoordinate - 1][firstCoordinate - 1 + i] = 'a';
+							this.opponentBoard[secondCoordinate - 1][firstCoordinate - 1 + i] = 'a';
 						}
 					} else {
 						if (secondCoordinate > 5) {
-							this.playerBoard[secondCoordinate -1 - i][firstCoordinate - 1] = 'a';
+							this.opponentBoard[secondCoordinate -1 - i][firstCoordinate - 1] = 'a';
 						} else {
-							this.playerBoard[secondCoordinate -1 + i][firstCoordinate - 1] = 'a';
+							this.opponentBoard[secondCoordinate -1 + i][firstCoordinate - 1] = 'a';
 						}
 					}
 				}
@@ -358,28 +358,28 @@ public class Player {
 	
 	public boolean Place_Battleship(int firstCoordinate, int secondCoordinate, int direction) {
 		boolean validSpot = true;
-		if (this.playerBoard[secondCoordinate - 1][firstCoordinate - 1] == '.') {
-			for (int i = 1; i < 5; i++) {
+		if (this.opponentBoard[secondCoordinate - 1][firstCoordinate - 1] == '.') {
+			for (int i = 1; i < 4; i++) {
 				if (direction == 0) {
 					if (firstCoordinate > 6) {
-						if (this.playerBoard[secondCoordinate - 1][firstCoordinate - 1 - i] != '.') {
+						if (this.opponentBoard[secondCoordinate - 1][firstCoordinate - 1 - i] != '.') {
 							validSpot = false;
 							break;
 						}
 					} else {
-						if (this.playerBoard[secondCoordinate - 1][firstCoordinate - 1 + i] != '.') {
+						if (this.opponentBoard[secondCoordinate - 1][firstCoordinate - 1 + i] != '.') {
 							validSpot = false;
 							break;
 						}
 					}
 				} else {
 					if (secondCoordinate > 6) {
-						if (this.playerBoard[secondCoordinate - 1 - i][firstCoordinate - 1] != '.') {
+						if (this.opponentBoard[secondCoordinate - 1 - i][firstCoordinate - 1] != '.') {
 							validSpot = false;
 							break;
 						}
 					} else {
-						if (this.playerBoard[secondCoordinate - 1 + i][firstCoordinate - 1] != '.') {
+						if (this.opponentBoard[secondCoordinate - 1 + i][firstCoordinate - 1] != '.') {
 							validSpot = false;
 							break;
 						}
@@ -388,19 +388,19 @@ public class Player {
 			}
 			
 			if (validSpot) {
-				this.playerBoard[secondCoordinate - 1][firstCoordinate - 1] = 'b';
-				for (int i = 1; i < 5; i++) {
+				this.opponentBoard[secondCoordinate - 1][firstCoordinate - 1] = 'b';
+				for (int i = 1; i < 4; i++) {
 					if (direction == 0) {
 						if (firstCoordinate > 6) {
-							this.playerBoard[secondCoordinate - 1][firstCoordinate - 1 - i] = 'b';
+							this.opponentBoard[secondCoordinate - 1][firstCoordinate - 1 - i] = 'b';
 						} else {
-							this.playerBoard[secondCoordinate - 1][firstCoordinate - 1 + i] = 'b';
+							this.opponentBoard[secondCoordinate - 1][firstCoordinate - 1 + i] = 'b';
 						}
 					} else {
 						if (secondCoordinate > 6) {
-							this.playerBoard[secondCoordinate - 1 - i][firstCoordinate - 1] = 'b';
+							this.opponentBoard[secondCoordinate - 1 - i][firstCoordinate - 1] = 'b';
 						} else {
-							this.playerBoard[secondCoordinate - 1 + i][firstCoordinate - 1] = 'b';
+							this.opponentBoard[secondCoordinate - 1 + i][firstCoordinate - 1] = 'b';
 						}
 					}
 				}
@@ -418,28 +418,28 @@ public class Player {
 	
 	public boolean Place_Cruiser(int firstCoordinate, int secondCoordinate, int direction) {
 		boolean validSpot = true;
-		if (this.playerBoard[secondCoordinate - 1][firstCoordinate - 1] == '.') {
-			for (int i = 1; i < 4; i++) {
+		if (this.opponentBoard[secondCoordinate - 1][firstCoordinate - 1] == '.') {
+			for (int i = 1; i < 3; i++) {
 				if (direction == 0) {
 					if (firstCoordinate > 7) {
-						if (this.playerBoard[secondCoordinate - 1][firstCoordinate - 1 - i] != '.') {
+						if (this.opponentBoard[secondCoordinate - 1][firstCoordinate - 1 - i] != '.') {
 							validSpot = false;
 							break;
 						}
 					} else {
-						if (this.playerBoard[secondCoordinate - 1][firstCoordinate - 1 + i] != '.') {
+						if (this.opponentBoard[secondCoordinate - 1][firstCoordinate - 1 + i] != '.') {
 							validSpot = false;
 							break;
 						}
 					}
 				} else {
 					if (secondCoordinate > 7) {
-						if (this.playerBoard[secondCoordinate - 1 - i][firstCoordinate - 1] != '.') {
+						if (this.opponentBoard[secondCoordinate - 1 - i][firstCoordinate - 1] != '.') {
 							validSpot = false;
 							break;
 						}
 					} else {
-						if (this.playerBoard[secondCoordinate - 1 + i][firstCoordinate - 1] != '.') {
+						if (this.opponentBoard[secondCoordinate - 1 + i][firstCoordinate - 1] != '.') {
 							validSpot = false;
 							break;
 						}
@@ -448,19 +448,19 @@ public class Player {
 			}
 			
 			if (validSpot) {
-				this.playerBoard[secondCoordinate - 1][firstCoordinate - 1] = 'c';
-				for (int i = 1; i < 4; i++) {
+				this.opponentBoard[secondCoordinate - 1][firstCoordinate - 1] = 'c';
+				for (int i = 1; i < 3; i++) {
 					if (direction == 0) {
 						if (firstCoordinate > 7) {
-							this.playerBoard[secondCoordinate - 1][firstCoordinate - 1 - i] = 'c';
+							this.opponentBoard[secondCoordinate - 1][firstCoordinate - 1 - i] = 'c';
 						} else {
-							this.playerBoard[secondCoordinate - 1][firstCoordinate - 1 + i] = 'c';
+							this.opponentBoard[secondCoordinate - 1][firstCoordinate - 1 + i] = 'c';
 						}
 					} else {
 						if (secondCoordinate > 7) {
-							this.playerBoard[secondCoordinate - 1 - i][firstCoordinate - 1] = 'c';
+							this.opponentBoard[secondCoordinate - 1 - i][firstCoordinate - 1] = 'c';
 						} else {
-							this.playerBoard[secondCoordinate - 1 + i][firstCoordinate - 1] = 'c';
+							this.opponentBoard[secondCoordinate - 1 + i][firstCoordinate - 1] = 'c';
 						}
 					}
 				}
@@ -478,28 +478,28 @@ public class Player {
 	
 	public boolean Place_Submarine(int firstCoordinate, int secondCoordinate, int direction) {
 		boolean validSpot = true;
-		if (this.playerBoard[secondCoordinate - 1][firstCoordinate - 1] == '.') {
+		if (this.opponentBoard[secondCoordinate - 1][firstCoordinate - 1] == '.') {
 			for (int i = 1; i < 3; i++) {
 				if (direction == 0) {
 					if (firstCoordinate > 8) {
-						if (this.playerBoard[secondCoordinate - 1][firstCoordinate - 1 - i] != '.') {
+						if (this.opponentBoard[secondCoordinate - 1][firstCoordinate - 1 - i] != '.') {
 							validSpot = false;
 							break;
 						}
 					} else {
-						if (this.playerBoard[secondCoordinate - 1][firstCoordinate - 1 + i] != '.') {
+						if (this.opponentBoard[secondCoordinate - 1][firstCoordinate - 1 + i] != '.') {
 							validSpot = false;
 							break;
 						}
 					}
 				} else {
 					if (secondCoordinate > 8) {
-						if (this.playerBoard[secondCoordinate -1 - i][firstCoordinate - 1] != '.') {
+						if (this.opponentBoard[secondCoordinate -1 - i][firstCoordinate - 1] != '.') {
 							validSpot = false;
 							break;
 						}
 					} else {
-						if (this.playerBoard[secondCoordinate -1 + i][firstCoordinate - 1] != '.') {
+						if (this.opponentBoard[secondCoordinate -1 + i][firstCoordinate - 1] != '.') {
 							validSpot = false;
 							break;
 						}
@@ -508,19 +508,19 @@ public class Player {
 			}
 			
 			if (validSpot) {
-				this.playerBoard[secondCoordinate - 1][firstCoordinate - 1] = 's';
+				this.opponentBoard[secondCoordinate - 1][firstCoordinate - 1] = 's';
 				for (int i = 1; i < 3; i++) {
 					if (direction == 0) {
 						if (firstCoordinate > 8) {
-							this.playerBoard[secondCoordinate - 1][firstCoordinate - 1 - i] = 's';
+							this.opponentBoard[secondCoordinate - 1][firstCoordinate - 1 - i] = 's';
 						} else {
-							this.playerBoard[secondCoordinate - 1][firstCoordinate - 1 + i] = 's';
+							this.opponentBoard[secondCoordinate - 1][firstCoordinate - 1 + i] = 's';
 						}
 					} else {
 						if (secondCoordinate > 8) {
-							this.playerBoard[secondCoordinate - 1 - i][firstCoordinate - 1] = 's';
+							this.opponentBoard[secondCoordinate - 1 - i][firstCoordinate - 1] = 's';
 						} else {
-							this.playerBoard[secondCoordinate - 1 + i][firstCoordinate - 1] = 's';
+							this.opponentBoard[secondCoordinate - 1 + i][firstCoordinate - 1] = 's';
 						}
 					}
 				}
@@ -538,28 +538,28 @@ public class Player {
 	
     public boolean Place_Destroyer(int firstCoordinate, int secondCoordinate, int direction) {
     	boolean validSpot = true;
-    	if (this.playerBoard[secondCoordinate - 1][firstCoordinate - 1] == '.') {
+    	if (this.opponentBoard[secondCoordinate - 1][firstCoordinate - 1] == '.') {
 			for (int i = 1; i < 2; i++) {
 				if (direction == 0) {
 					if (firstCoordinate > 9) {
-						if (this.playerBoard[secondCoordinate - 1][firstCoordinate - 1 - i] != '.') {
+						if (this.opponentBoard[secondCoordinate - 1][firstCoordinate - 1 - i] != '.') {
 							validSpot = false;
 							break;
 						}
 					} else {
-						if (this.playerBoard[secondCoordinate - 1][firstCoordinate - 1 + i] != '.') {
+						if (this.opponentBoard[secondCoordinate - 1][firstCoordinate - 1 + i] != '.') {
 							validSpot = false;
 							break;
 						}
 					}
 				} else {
 					if (secondCoordinate > 9) {
-						if (this.playerBoard[secondCoordinate -1 - i][firstCoordinate - 1] != '.') {
+						if (this.opponentBoard[secondCoordinate -1 - i][firstCoordinate - 1] != '.') {
 							validSpot = false;
 							break;
 						}
 					} else {
-						if (this.playerBoard[secondCoordinate -1 + i][firstCoordinate - 1] != '.') {
+						if (this.opponentBoard[secondCoordinate -1 + i][firstCoordinate - 1] != '.') {
 							validSpot = false;
 							break;
 						}
@@ -568,19 +568,19 @@ public class Player {
 			}
 			
 			if (validSpot) {
-				this.playerBoard[secondCoordinate - 1][firstCoordinate - 1] = 'd';
+				this.opponentBoard[secondCoordinate - 1][firstCoordinate - 1] = 'd';
 				for (int i = 1; i < 2; i++) {
 					if (direction == 0) {
 						if (firstCoordinate > 9) {
-							this.playerBoard[secondCoordinate - 1][firstCoordinate - 1 - i] = 'd';
+							this.opponentBoard[secondCoordinate - 1][firstCoordinate - 1 - i] = 'd';
 						} else {
-							this.playerBoard[secondCoordinate - 1][firstCoordinate - 1 + i] = 'd';
+							this.opponentBoard[secondCoordinate - 1][firstCoordinate - 1 + i] = 'd';
 						}
 					} else {
 						if (secondCoordinate > 9) {
-							this.playerBoard[secondCoordinate -1 - i][firstCoordinate - 1] = 'd';
+							this.opponentBoard[secondCoordinate -1 - i][firstCoordinate - 1] = 'd';
 						} else {
-							this.playerBoard[secondCoordinate -1 + i][firstCoordinate - 1] = 'd';
+							this.opponentBoard[secondCoordinate -1 + i][firstCoordinate - 1] = 'd';
 						}
 					}
 				}
@@ -712,11 +712,11 @@ public class Player {
     	boolean isGameOver = true;
     	for (int i = 0; i < 10; i++) {
 			for (int j = 0; j < 10; j++) {
-				if (this.playerBoard[i][j] == 'a' ||
-						this.playerBoard[i][j] == 'b' ||
-						this.playerBoard[i][j] == 'c' ||
-						this.playerBoard[i][j] == 's' ||
-						this.playerBoard[i][j] == 'd') {
+				if (this.opponentBoard[i][j] == 'a' ||
+						this.opponentBoard[i][j] == 'b' ||
+						this.opponentBoard[i][j] == 'c' ||
+						this.opponentBoard[i][j] == 's' ||
+						this.opponentBoard[i][j] == 'd') {
 					isGameOver = false;
 				}
 			}
