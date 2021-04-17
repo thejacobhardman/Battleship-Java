@@ -26,6 +26,7 @@
 
 import java.text.MessageFormat;
 import java.util.Scanner;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Player {
 	
@@ -215,20 +216,33 @@ public class Player {
 		
 	}
 	
-	public void Place_Aircraft_Carrier(int firstCoordinate, int secondCoordinate, int direction) {
-		if (this.playerBoard[firstCoordinate - 1][secondCoordinate - 1] == '.') {
-			boolean validSpot = true;
-			
+	public boolean Place_Aircraft_Carrier(int firstCoordinate, int secondCoordinate, int direction) {
+		boolean validSpot = true;
+		if (this.playerBoard[secondCoordinate - 1][firstCoordinate - 1] == '.') {
 			for (int i = 1; i < 6; i++) {
 				if (direction == 0) {
-					if (this.playerBoard[secondCoordinate - 1][firstCoordinate - 1 + i] != '.') {
-						validSpot = false;
-						break;
+					if (firstCoordinate > 5) {
+						if (this.playerBoard[secondCoordinate - 1][firstCoordinate - 1 - i] != '.') {
+							validSpot = false;
+							break;
+						}
+					} else {
+						if (this.playerBoard[secondCoordinate - 1][firstCoordinate - 1 + i] != '.') {
+							validSpot = false;
+							break;
+						}
 					}
 				} else {
-					if (this.playerBoard[secondCoordinate -1 + i][firstCoordinate - 1] != '.') {
-						validSpot = false;
-						break;
+					if (secondCoordinate > 5) {
+						if (this.playerBoard[secondCoordinate -1 - i][firstCoordinate - 1] != '.') {
+							validSpot = false;
+							break;
+						}
+					} else {
+						if (this.playerBoard[secondCoordinate -1 + i][firstCoordinate - 1] != '.') {
+							validSpot = false;
+							break;
+						}
 					}
 				}
 			}
@@ -237,33 +251,58 @@ public class Player {
 				this.playerBoard[secondCoordinate - 1][firstCoordinate - 1] = 'a';
 				for (int i = 1; i < 6; i++) {
 					if (direction == 0) {
-						this.playerBoard[secondCoordinate - 1][firstCoordinate - 1 + i] = 'a';
+						if (firstCoordinate > 5) {
+							this.playerBoard[secondCoordinate - 1][firstCoordinate - 1 - i] = 'a';
+						} else {
+							this.playerBoard[secondCoordinate - 1][firstCoordinate - 1 + i] = 'a';
+						}
 					} else {
-						this.playerBoard[secondCoordinate -1 + i][firstCoordinate - 1] = 'a';
+						if (secondCoordinate > 5) {
+							this.playerBoard[secondCoordinate -1 - i][firstCoordinate - 1] = 'a';
+						} else {
+							this.playerBoard[secondCoordinate -1 + i][firstCoordinate - 1] = 'a';
+						}
 					}
 				}
 			} else {
 				System.out.println("Please select a spot and direction with enough space to place your ship.");
+				validSpot = false;
 			}
 		} else {
 			System.out.println("Please select an empty spot to place your ship.");
+			validSpot = false;
 		}
+		
+		return validSpot;
 	}
 	
-	public void Place_Battleship(int firstCoordinate, int secondCoordinate, int direction) {
-		if (this.playerBoard[firstCoordinate - 1][secondCoordinate - 1] == '.') {
-			boolean validSpot = true;
-			
+	public boolean Place_Battleship(int firstCoordinate, int secondCoordinate, int direction) {
+		boolean validSpot = true;
+		if (this.playerBoard[secondCoordinate - 1][firstCoordinate - 1] == '.') {
 			for (int i = 1; i < 5; i++) {
 				if (direction == 0) {
-					if (this.playerBoard[secondCoordinate - 1][firstCoordinate - 1 + i] != '.') {
-						validSpot = false;
-						break;
+					if (firstCoordinate > 6) {
+						if (this.playerBoard[secondCoordinate - 1][firstCoordinate - 1 - i] != '.') {
+							validSpot = false;
+							break;
+						}
+					} else {
+						if (this.playerBoard[secondCoordinate - 1][firstCoordinate - 1 + i] != '.') {
+							validSpot = false;
+							break;
+						}
 					}
 				} else {
-					if (this.playerBoard[secondCoordinate - 1 + i][firstCoordinate - 1] != '.') {
-						validSpot = false;
-						break;
+					if (secondCoordinate > 6) {
+						if (this.playerBoard[secondCoordinate - 1 - i][firstCoordinate - 1] != '.') {
+							validSpot = false;
+							break;
+						}
+					} else {
+						if (this.playerBoard[secondCoordinate - 1 + i][firstCoordinate - 1] != '.') {
+							validSpot = false;
+							break;
+						}
 					}
 				}
 			}
@@ -272,33 +311,58 @@ public class Player {
 				this.playerBoard[secondCoordinate - 1][firstCoordinate - 1] = 'b';
 				for (int i = 1; i < 5; i++) {
 					if (direction == 0) {
-						this.playerBoard[secondCoordinate - 1][firstCoordinate - 1 + i] = 'b';
+						if (firstCoordinate > 6) {
+							this.playerBoard[secondCoordinate - 1][firstCoordinate - 1 - i] = 'b';
+						} else {
+							this.playerBoard[secondCoordinate - 1][firstCoordinate - 1 + i] = 'b';
+						}
 					} else {
-						this.playerBoard[secondCoordinate - 1 + i][firstCoordinate - 1] = 'b';
+						if (secondCoordinate > 6) {
+							this.playerBoard[secondCoordinate - 1 - i][firstCoordinate - 1] = 'b';
+						} else {
+							this.playerBoard[secondCoordinate - 1 + i][firstCoordinate - 1] = 'b';
+						}
 					}
 				}
 			} else {
 				System.out.println("Please select a spot and direction with enough space to place your ship.");
+				validSpot = false;
 			}
 		} else {
 			System.out.println("Please select an empty spot to place your ship.");
+			validSpot = false;
 		}
+		
+		return validSpot;
 	}
 	
-	public void Place_Cruiser(int firstCoordinate, int secondCoordinate, int direction) {
-		if (this.playerBoard[firstCoordinate - 1][secondCoordinate - 1] == '.') {
-			boolean validSpot = true;
-			
+	public boolean Place_Cruiser(int firstCoordinate, int secondCoordinate, int direction) {
+		boolean validSpot = true;
+		if (this.playerBoard[secondCoordinate - 1][firstCoordinate - 1] == '.') {
 			for (int i = 1; i < 4; i++) {
 				if (direction == 0) {
-					if (this.playerBoard[secondCoordinate - 1][firstCoordinate - 1 + i] != '.') {
-						validSpot = false;
-						break;
+					if (firstCoordinate > 7) {
+						if (this.playerBoard[secondCoordinate - 1][firstCoordinate - 1 - i] != '.') {
+							validSpot = false;
+							break;
+						}
+					} else {
+						if (this.playerBoard[secondCoordinate - 1][firstCoordinate - 1 + i] != '.') {
+							validSpot = false;
+							break;
+						}
 					}
 				} else {
-					if (this.playerBoard[secondCoordinate - 1 + i][firstCoordinate - 1] != '.') {
-						validSpot = false;
-						break;
+					if (secondCoordinate > 7) {
+						if (this.playerBoard[secondCoordinate - 1 - i][firstCoordinate - 1] != '.') {
+							validSpot = false;
+							break;
+						}
+					} else {
+						if (this.playerBoard[secondCoordinate - 1 + i][firstCoordinate - 1] != '.') {
+							validSpot = false;
+							break;
+						}
 					}
 				}
 			}
@@ -307,33 +371,58 @@ public class Player {
 				this.playerBoard[secondCoordinate - 1][firstCoordinate - 1] = 'c';
 				for (int i = 1; i < 4; i++) {
 					if (direction == 0) {
-						this.playerBoard[secondCoordinate - 1][firstCoordinate - 1 + i] = 'c';
+						if (firstCoordinate > 7) {
+							this.playerBoard[secondCoordinate - 1][firstCoordinate - 1 - i] = 'c';
+						} else {
+							this.playerBoard[secondCoordinate - 1][firstCoordinate - 1 + i] = 'c';
+						}
 					} else {
-						this.playerBoard[secondCoordinate - 1 + i][firstCoordinate - 1] = 'c';
+						if (secondCoordinate > 7) {
+							this.playerBoard[secondCoordinate - 1 - i][firstCoordinate - 1] = 'c';
+						} else {
+							this.playerBoard[secondCoordinate - 1 + i][firstCoordinate - 1] = 'c';
+						}
 					}
 				}
 			} else {
 				System.out.println("Please select a spot and direction with enough space to place your ship.");
+				validSpot = false;
 			}
 		} else {
 			System.out.println("Please select an empty spot to place your ship.");
+			validSpot = false;
 		}
+		
+		return validSpot;
 	}
 	
-	public void Place_Submarine(int firstCoordinate, int secondCoordinate, int direction) {
-		if (this.playerBoard[firstCoordinate - 1][secondCoordinate - 1] == '.') {
-			boolean validSpot = true;
-			
+	public boolean Place_Submarine(int firstCoordinate, int secondCoordinate, int direction) {
+		boolean validSpot = true;
+		if (this.playerBoard[secondCoordinate - 1][firstCoordinate - 1] == '.') {
 			for (int i = 1; i < 3; i++) {
 				if (direction == 0) {
-					if (this.playerBoard[secondCoordinate - 1][firstCoordinate - 1 + i] != '.') {
-						validSpot = false;
-						break;
+					if (firstCoordinate > 8) {
+						if (this.playerBoard[secondCoordinate - 1][firstCoordinate - 1 - i] != '.') {
+							validSpot = false;
+							break;
+						}
+					} else {
+						if (this.playerBoard[secondCoordinate - 1][firstCoordinate - 1 + i] != '.') {
+							validSpot = false;
+							break;
+						}
 					}
 				} else {
-					if (this.playerBoard[secondCoordinate -1 + i][firstCoordinate - 1] != '.') {
-						validSpot = false;
-						break;
+					if (secondCoordinate > 8) {
+						if (this.playerBoard[secondCoordinate -1 - i][firstCoordinate - 1] != '.') {
+							validSpot = false;
+							break;
+						}
+					} else {
+						if (this.playerBoard[secondCoordinate -1 + i][firstCoordinate - 1] != '.') {
+							validSpot = false;
+							break;
+						}
 					}
 				}
 			}
@@ -342,33 +431,58 @@ public class Player {
 				this.playerBoard[secondCoordinate - 1][firstCoordinate - 1] = 's';
 				for (int i = 1; i < 3; i++) {
 					if (direction == 0) {
-						this.playerBoard[secondCoordinate - 1][firstCoordinate - 1 + i] = 's';
+						if (firstCoordinate > 8) {
+							this.playerBoard[secondCoordinate - 1][firstCoordinate - 1 - i] = 's';
+						} else {
+							this.playerBoard[secondCoordinate - 1][firstCoordinate - 1 + i] = 's';
+						}
 					} else {
-						this.playerBoard[secondCoordinate - 1 + i][firstCoordinate - 1] = 's';
+						if (secondCoordinate > 8) {
+							this.playerBoard[secondCoordinate - 1 - i][firstCoordinate - 1] = 's';
+						} else {
+							this.playerBoard[secondCoordinate - 1 + i][firstCoordinate - 1] = 's';
+						}
 					}
 				}
 			} else {
 				System.out.println("Please select a spot and direction with enough space to place your ship.");
+				validSpot = false;
 			}
 		} else {
 			System.out.println("Please select an empty spot to place your ship.");
+			validSpot = false;
 		}
+		
+		return validSpot;
 	}
 	
-    public void Place_Destroyer(int firstCoordinate, int secondCoordinate, int direction) {
-    	if (this.playerBoard[firstCoordinate - 1][secondCoordinate - 1] == '.') {
-			boolean validSpot = true;
-			
+    public boolean Place_Destroyer(int firstCoordinate, int secondCoordinate, int direction) {
+    	boolean validSpot = true;
+    	if (this.playerBoard[secondCoordinate - 1][firstCoordinate - 1] == '.') {
 			for (int i = 1; i < 2; i++) {
 				if (direction == 0) {
-					if (this.playerBoard[secondCoordinate - 1][firstCoordinate - 1 + i] != '.') {
-						validSpot = false;
-						break;
+					if (firstCoordinate > 9) {
+						if (this.playerBoard[secondCoordinate - 1][firstCoordinate - 1 - i] != '.') {
+							validSpot = false;
+							break;
+						}
+					} else {
+						if (this.playerBoard[secondCoordinate - 1][firstCoordinate - 1 + i] != '.') {
+							validSpot = false;
+							break;
+						}
 					}
 				} else {
-					if (this.playerBoard[secondCoordinate -1 + i][firstCoordinate - 1] != '.') {
-						validSpot = false;
-						break;
+					if (secondCoordinate > 9) {
+						if (this.playerBoard[secondCoordinate -1 - i][firstCoordinate - 1] != '.') {
+							validSpot = false;
+							break;
+						}
+					} else {
+						if (this.playerBoard[secondCoordinate -1 + i][firstCoordinate - 1] != '.') {
+							validSpot = false;
+							break;
+						}
 					}
 				}
 			}
@@ -377,21 +491,132 @@ public class Player {
 				this.playerBoard[secondCoordinate - 1][firstCoordinate - 1] = 'd';
 				for (int i = 1; i < 2; i++) {
 					if (direction == 0) {
-						this.playerBoard[secondCoordinate - 1][firstCoordinate - 1 + i] = 'd';
+						if (firstCoordinate > 9) {
+							this.playerBoard[secondCoordinate - 1][firstCoordinate - 1 - i] = 'd';
+						} else {
+							this.playerBoard[secondCoordinate - 1][firstCoordinate - 1 + i] = 'd';
+						}
 					} else {
-						this.playerBoard[secondCoordinate -1 + i][firstCoordinate - 1] = 'd';
+						if (secondCoordinate > 9) {
+							this.playerBoard[secondCoordinate -1 - i][firstCoordinate - 1] = 'd';
+						} else {
+							this.playerBoard[secondCoordinate -1 + i][firstCoordinate - 1] = 'd';
+						}
 					}
 				}
 			} else {
 				System.out.println("Please select a spot and direction with enough space to place your ship.");
+				validSpot = false;
 			}
 		} else {
 			System.out.println("Please select an empty spot to place your ship.");
+			validSpot = false;
 		}
+    	
+    	return validSpot;
     }
 	
+    public void Place_Ships() {
+    	boolean validInput = false;
+    	int firstCoordinate = 0, secondCoordinate = 0, direction = 0;
+    	String[] shipNames = { "Aircraft Carrier", "Battleship", "Cruiser", "Submarine", "Destroyer" };
+    	for (int i = 0; i < 5; i++) {
+    		boolean validSpot = false;
+    		while (!validSpot) {
+    			validInput = false;
+        		while (!validInput) {
+            		System.out.print("\nPlease enter the origin coordinate that you'd like to place your " + shipNames[i] + " in: ");
+                	String origin = this.input.nextLine();
+                	String[] fullCoordinates = origin.split("");
+            		
+            		if (fullCoordinates.length <= 3) {
+            			String firstCoordinatePart = fullCoordinates[0];
+            			String secondCoordinatePart = "";
+            			
+            			if (fullCoordinates.length == 2) { secondCoordinatePart = fullCoordinates[1]; }
+            			else { secondCoordinatePart = fullCoordinates[1] + fullCoordinates[2]; }
+            			
+            			if (this.Validate_First_Coordinate(firstCoordinatePart) == true && this.Validate_Second_Coordinate(secondCoordinatePart) == true) {
+            			    firstCoordinate = this.Convert_Input(firstCoordinatePart);
+            				secondCoordinate = Integer.parseInt(secondCoordinatePart);
+            				validInput = true;
+            			} else {
+            				System.out.println("Please enter valid coordinates.");
+            			}
+            		} else {
+            			System.out.println("Please enter the coordinates that you'd your ship to be placed.");
+            		}
+            	}
+        		
+        		validInput = false;
+        		while (!validInput) {
+        			System.out.print("\nPlease enter '1' if you'd like your ship to be placed vertically, or '0' if you'd like your ship to be placed horizontally: ");
+        			String orientation = this.input.nextLine();
+        			
+        			if (orientation.equals("1")) {
+        				direction = 1;
+        				validInput = true;
+        			} else if (orientation.equals("0")) {
+        				direction = 0;
+        				validInput = true;
+        			} else {
+        				System.out.println("Please enter a valid selection.");
+        			}
+        		}
+        		
+        		if (i == 0) {
+        			if (this.Place_Aircraft_Carrier(firstCoordinate, secondCoordinate, direction) == true) {
+            			System.out.println("Placing Aircraft Carrier...");
+            			validSpot = true;
+        			} 
+        		} else if (i == 1) {
+        			if (this.Place_Battleship(firstCoordinate, secondCoordinate, direction) == true) {
+            			System.out.println("Placing Battleship...");
+            			validSpot = true;
+        			}
+        		} else if (i == 2) {
+        			if (this.Place_Cruiser(firstCoordinate, secondCoordinate, direction)) {
+            			System.out.println("Placing Cruiser...");
+            			validSpot = true;
+        			}
+        		} else if (i == 3) {
+        			if (this.Place_Submarine(firstCoordinate, secondCoordinate, direction) == true) {
+            			System.out.println("Placing Submarine...");
+            			validSpot = true;
+        			}
+        		} else if (i == 4) {
+        			if (this.Place_Destroyer(firstCoordinate, secondCoordinate, direction) == true) {
+            			System.out.println("Placing Destroyer...");
+            			validSpot = true;
+        			}
+        		}
+    		}
+    	}
+    }
+    
+    public void Random_Place_Ships() {
+    	for (int i = 0; i < 5; i++) {
+    		int firstCoordinate = ThreadLocalRandom.current().nextInt(1, 11);
+    		int secondCoordinate = ThreadLocalRandom.current().nextInt(1, 11);
+    		int direction = ThreadLocalRandom.current().nextInt(0, 2);
+    		
+    		if (i == 0) {
+    			this.Place_Aircraft_Carrier(firstCoordinate, secondCoordinate, direction);
+    		} else if (i == 1) {
+    			this.Place_Battleship(firstCoordinate, secondCoordinate, direction);
+    		} else if (i == 2) {
+    			this.Place_Cruiser(firstCoordinate, secondCoordinate, direction);
+    		} else if (i == 3) {
+    			this.Place_Submarine(firstCoordinate, secondCoordinate, direction);
+    		} else if (i == 4) {
+    			this.Place_Destroyer(firstCoordinate, secondCoordinate, direction);
+    		}
+    	}
+    }
+    
 	public void Run_Until_Close() {
 		boolean isRunning = true;
+		this.Place_Ships();
 		while (isRunning) {
 			this.Player_Turn();
 		}
