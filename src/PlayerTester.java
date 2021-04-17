@@ -20,12 +20,6 @@ public class PlayerTester {
 	public static void main(String[] args) {
 		Player PlayerOne = new Player();
 		
-		PlayerOne.Place_Aircraft_Carrier(1, 1, 0);
-		PlayerOne.Place_Battleship(3, 2, 1);
-		PlayerOne.Place_Cruiser(8, 1, 1);
-		PlayerOne.Place_Destroyer(6, 7, 1);
-		PlayerOne.Place_Submarine(1, 10, 0);
-		
 		PlayerOne.Run_Until_Close();
 	}
 
