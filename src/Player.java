@@ -67,22 +67,6 @@ public class Player {
 	 * Return value: None                                                   *
 	 ***********************************************************************/
 	public void Display_Player_Board() {
-		
-//		Initial board:   
-//			| A  B  C  D  E  F  G  H  I  J |
-//		 ---+------------------------------+ 
-//		  1 | .  .  .  .  .  .  .  .  .  . | 
-//		  2 | .  .  .  .  .  .  .  .  .  . |         a/A – Aircraft Carrier (5) 
-//		  3 | .  .  .  .  .  .  .  .  .  . |         b/B – Battleship (4) 
-//		  4 | .  .  .  .  .  .  .  .  .  . |         c/C – Cruiser (3) 
-//		  5 | .  .  .  .  .  .  .  .  .  . |         s/S – Submarine (3) 
-//		  6 | .  .  .  .  .  .  .  .  .  . |         d/D – Destroyer (2) 
-//		  7 | .  .  .  .  .  .  .  .  .  . | 
-//		  8 | .  .  .  .  .  .  .  .  .  . |          .  - Unexplored 
-//		  9 | .  .  .  .  .  .  .  .  .  . |          @  - Missed shot
-//		 10 | .  .  .  .  .  .  .  .  .  . |
-//		 ---+------------------------------+
-		
 		System.out.println("   | A  B  C  D  E  F  G  H  I  J |");
 		System.out.println("---+------------------------------+");
 		for (int i = 0; i < 10; i++) {
