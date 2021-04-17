@@ -596,27 +596,41 @@ public class Player {
     
     public void Random_Place_Ships() {
     	for (int i = 0; i < 5; i++) {
-    		int firstCoordinate = ThreadLocalRandom.current().nextInt(1, 11);
-    		int secondCoordinate = ThreadLocalRandom.current().nextInt(1, 11);
-    		int direction = ThreadLocalRandom.current().nextInt(0, 2);
-    		
-    		if (i == 0) {
-    			this.Place_Aircraft_Carrier(firstCoordinate, secondCoordinate, direction);
-    		} else if (i == 1) {
-    			this.Place_Battleship(firstCoordinate, secondCoordinate, direction);
-    		} else if (i == 2) {
-    			this.Place_Cruiser(firstCoordinate, secondCoordinate, direction);
-    		} else if (i == 3) {
-    			this.Place_Submarine(firstCoordinate, secondCoordinate, direction);
-    		} else if (i == 4) {
-    			this.Place_Destroyer(firstCoordinate, secondCoordinate, direction);
+    		boolean validSpot = false;
+    		while (!validSpot) {
+    			int firstCoordinate = ThreadLocalRandom.current().nextInt(1, 11);
+        		int secondCoordinate = ThreadLocalRandom.current().nextInt(1, 11);
+        		int direction = ThreadLocalRandom.current().nextInt(0, 2);
+        		
+        		if (i == 0) {
+        			if (this.Place_Aircraft_Carrier(firstCoordinate, secondCoordinate, direction) == true) {
+            			validSpot = true;
+        			} 
+        		} else if (i == 1) {
+        			if (this.Place_Battleship(firstCoordinate, secondCoordinate, direction) == true) {
+            			validSpot = true;
+        			}
+        		} else if (i == 2) {
+        			if (this.Place_Cruiser(firstCoordinate, secondCoordinate, direction)) {
+            			validSpot = true;
+        			}
+        		} else if (i == 3) {
+        			if (this.Place_Submarine(firstCoordinate, secondCoordinate, direction) == true) {
+            			validSpot = true;
+        			}
+        		} else if (i == 4) {
+        			if (this.Place_Destroyer(firstCoordinate, secondCoordinate, direction) == true) {
+            			validSpot = true;
+        			}
+        		}
     		}
     	}
+    	System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
     }
     
 	public void Run_Until_Close() {
 		boolean isRunning = true;
-		this.Place_Ships();
+		this.Random_Place_Ships();
 		while (isRunning) {
 			this.Player_Turn();
 		}
